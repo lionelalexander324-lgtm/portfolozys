@@ -1,15 +1,27 @@
 import { useEffect, useState } from 'react'
 
 const INTRO_KEY = 'zys-v10-intro-seen'
+const INTRO_REPLAY_EVENT = 'portfolio:intro-replay'
 
 export function shouldSkipIntro() {
   if (typeof window === 'undefined') return false
-  return window.location.search.includes('qa=1') || window.matchMedia('(prefers-reduced-motion: reduce)').matches || sessionStorage.getItem(INTRO_KEY) === '1'
+  const query = new URLSearchParams(window.location.search)
+  const forceReplay = query.get('intro') === 'replay'
+  return !forceReplay && (query.get('qa') === '1' || window.matchMedia('(prefers-reduced-motion: reduce)').matches || sessionStorage.getItem(INTRO_KEY) === '1')
 }
 
 export function IntroLoader() {
   const [visible, setVisible] = useState(() => !shouldSkipIntro())
   const [leaving, setLeaving] = useState(false)
+
+  useEffect(() => {
+    const replay = () => {
+      setLeaving(false)
+      setVisible(true)
+    }
+    window.addEventListener(INTRO_REPLAY_EVENT, replay)
+    return () => window.removeEventListener(INTRO_REPLAY_EVENT, replay)
+  }, [])
 
   useEffect(() => {
     if (!visible) return

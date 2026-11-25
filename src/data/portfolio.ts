@@ -14,11 +14,11 @@ export type PortfolioItem = {
 export const campaigns: PortfolioItem[] = [
   { id: 'true-love', title: 'True Love Arrives', category: 'campaign', image: './assets/banners/true-love-arrives.webp', description: '恋爱主题活动 · 聚焦情感互动的活动视觉', url: 'https://d1m0okuba9ph2x.cloudfront.net/campaigns/true-love-arrives/?v=2069d5e', alt: 'True Love Arrives 活动横幅' },
   { id: 'your-cover', title: 'Your Cover, Your Style', category: 'campaign', image: './assets/banners/your-cover-your-style.webp', description: '个性化封面活动 · 玩法构思、英文文案与上线视觉', url: 'https://d1m0okuba9ph2x.cloudfront.net/campaigns/your-cover-your-style/', alt: 'Your Cover, Your Style 活动横幅' },
-  { id: 'trick-or-treat', title: 'Trick or Treat', category: 'campaign', image: './assets/banners/v10/trick-or-treat.webp', description: '累计送出曲奇幸运礼物，达成目标可获得万圣节座驾与金币奖励。', url: 'https://d1m0okuba9ph2x.cloudfront.net/campaigns/trick-or-treat/', alt: 'Trick or Treat 万圣节活动横幅' },
+  { id: 'trick-or-treat', title: 'Trick or Treat', category: 'campaign', image: './assets/banners/v10/trick-or-treat.jpg', description: '累计送出曲奇幸运礼物，达成目标可获得万圣节座驾与金币奖励。', url: 'https://d1m0okuba9ph2x.cloudfront.net/campaigns/trick-or-treat/', alt: 'Trick or Treat 万圣节活动横幅' },
   { id: 'pinoy-henyo', title: 'Pinoy Henyo', category: 'campaign', image: './assets/banners/pinoy-henyo.webp', description: '菲律宾猜词互动 · 房间玩法与活动素材', url: 'https://lionelalexander324-lgtm.github.io/game/', alt: 'Pinoy Henyo 猜词活动横幅' },
   { id: 'team-up', title: 'Team Up for Love', category: 'campaign', image: './assets/banners/team-up-for-love.webp', description: '组队恋爱主题活动 · 视觉物料与互动机制', url: 'https://d1m0okuba9ph2x.cloudfront.net/campaigns/team-up-for-love/', alt: 'Team Up for Love 活动横幅' },
   { id: 'official-host', title: '活动主播官方招募', category: 'campaign', image: './assets/banners/v10/official-host-recruitment.webp', description: '推荐官方主播成功入选后，推荐人与主持人均可获得对应奖励。', url: 'https://d1m0okuba9ph2x.cloudfront.net/campaigns/super-idol-official-recruitment/', alt: 'Mimoon 活动主播官方招募横幅' },
-  { id: 'dance-challenge', title: 'MIMOON 舞蹈模仿赛', category: 'campaign', image: './assets/banners/v10/mimoon-dance-challenge.webp', description: '模仿 MIMOON 人舞蹈并发布社交软件，优秀作品可获得专属坐骑与金币。', url: 'https://d1m0okuba9ph2x.cloudfront.net/campaigns/mimoon-dance-challenge/', alt: 'MIMOON 舞蹈模仿赛横幅' },
+  { id: 'dance-challenge', title: 'MIMOON 舞蹈模仿赛', category: 'campaign', image: './assets/banners/v10/mimoon-dance-challenge.jpg', description: '模仿 MIMOON 人舞蹈并发布社交软件，优秀作品可获得专属坐骑与金币。', url: 'https://d1m0okuba9ph2x.cloudfront.net/campaigns/mimoon-dance-challenge/', alt: 'MIMOON 舞蹈模仿赛横幅' },
   { id: 'game-fever', title: 'Game Fever Challenge', category: 'campaign', image: './assets/banners/game-fever-challenge.webp', description: '游戏挑战活动 · 竞技氛围与激励信息', url: 'https://d1m0okuba9ph2x.cloudfront.net/campaigns/game-fever-challenge/', alt: 'Game Fever Challenge 活动横幅' },
 ]
 
@@ -49,7 +49,7 @@ export const motionWorks: PortfolioItem[] = [
   { id: 'game', title: 'Game Time', category: 'motion', video: './assets/motion/game.mp4', poster: './assets/motion-posters/game.webp', description: '游戏主题座位框', alt: '游戏主题座位框动效' },
   { id: 'guitar', title: 'Guitar Mood', category: 'motion', video: './assets/motion/guitar.mp4', poster: './assets/motion-posters/guitar.webp', description: '吉他主题座位框', alt: '吉他主题座位框动效' },
   { id: 'reading', title: 'Reading Corner', category: 'motion', video: './assets/motion/reading.mp4', poster: './assets/motion-posters/reading.webp', description: '阅读主题座位框', alt: '读书主题座位框动效' },
-  { id: 'sleeping', title: 'Sleepy Owl', category: 'motion', poster: './assets/motion-posters/sleeping.webp', description: '睡眠主题座位框 · GitHub 轻量版使用静态预览', alt: '睡觉主题座位框动效静态预览' },
+  { id: 'sleeping', title: 'Sleepy Owl', category: 'motion', video: './assets/motion/sleeping.mp4', poster: './assets/motion-posters/sleeping.webp', description: '睡眠主题座位框', alt: '睡觉主题座位框动效' },
   { id: 'purple-yellow', title: 'Purple × Yellow', category: 'motion', video: './assets/motion/purple-yellow.mp4', poster: './assets/motion-posters/purple-yellow.webp', description: '双人座位框', alt: '黄紫双人座位框动效' },
 ]
 

@@ -42,6 +42,11 @@ export function ContactFooter() {
     timer.current = window.setTimeout(() => setToast(''), 2200)
   }
 
+  const replayIntro = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.dispatchEvent(new Event('portfolio:intro-replay'))
+  }
+
   return <footer id="contact" className="footer work-panel panel-contact">
     <div className="contact-heading"><span>LET'S CONNECT.</span><h2>期待相遇。</h2><p>感谢您浏览我的作品集，希望有机会与您进一步交流，分享更多关于创意、运营与实践的想法。</p></div>
     <div className="contact-methods">
@@ -49,6 +54,6 @@ export function ContactFooter() {
       <button type="button" onClick={() => copyValue(contact.contactEmail, '已复制邮箱地址')}><small>EMAIL / 点击复制</small><strong>{contact.contactEmail}</strong><Copy aria-hidden="true" /></button>
     </div>
     <div className={`copy-toast${toast ? ' is-visible' : ''}`} role="status" aria-live="polite">{toast}</div>
-    <div className="footer-bottom"><span>ZHANG YASHU © 2026</span><a href="#top" onClick={event => requestPageTransition(event, '#top')}>返回顶部</a></div>
+    <div className="footer-bottom"><span>ZHANG YASHU © 2026</span><div className="footer-links"><button type="button" onClick={replayIntro}>重播开场</button><a href="#top" onClick={event => requestPageTransition(event, '#top')}>返回顶部</a></div></div>
   </footer>
 }

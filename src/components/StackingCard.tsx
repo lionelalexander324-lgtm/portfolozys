@@ -28,6 +28,7 @@ export function StackingCard({ item, index }: { item: PortfolioItem, index: numb
           <button type="button" aria-pressed={interactive} onClick={togglePreview}><MousePointer2 size={15} />{!previewEnabled ? '载入实时预览' : interactive ? '退出操作' : '进入操作'}</button>
         </div>
         <div className="preview-window">
+          <img className="preview-backdrop" src={item.image} alt="" aria-hidden="true" loading="lazy" decoding="async" />
           <img className={loaded && previewEnabled ? 'preview-fallback is-loaded' : 'preview-fallback'} src={item.image} alt={item.alt} loading="lazy" decoding="async" />
           {previewEnabled && item.url && <iframe className={`${loaded ? 'is-loaded' : ''} ${interactive ? 'is-interactive' : ''}`} src={item.url} title={`${item.title} 实时网页预览`} loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" referrerPolicy="no-referrer" tabIndex={interactive ? 0 : -1} onLoad={() => setLoaded(true)} />}
           {previewEnabled && !loaded && <span className="preview-loading">正在载入真实网页…</span>}
