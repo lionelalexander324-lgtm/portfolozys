@@ -1,13 +1,80 @@
 import { motion } from 'framer-motion'
-import { useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { ArrowDown, ArrowRight } from 'lucide-react'
-import { requestPageTransition } from './PageTransition'
+import { PORTFOLIO_NAVIGATION_EVENT, requestPageTransition } from './PageTransition'
 import { shouldSkipIntro } from './IntroLoader'
 
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const playbackRequest = useRef<Promise<void> | null>(null)
   const skipIntro = shouldSkipIntro()
   const introDelay = skipIntro ? 0 : .72
+
+  const requestPlayback = useCallback(() => {
+    const video = videoRef.current
+    if (!video || document.visibilityState === 'hidden' || !video.paused || playbackRequest.current) return
+    video.defaultMuted = true
+    video.muted = true
+    video.playsInline = true
+    const request = video.play()
+    playbackRequest.current = request
+    request.catch(() => undefined).finally(() => {
+      if (playbackRequest.current === request) playbackRequest.current = null
+    })
+  }, [])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    video.defaultMuted = true
+    video.muted = true
+    video.playsInline = true
+    video.preload = 'auto'
+    if (video.networkState === HTMLMediaElement.NETWORK_EMPTY) video.load()
+
+    const isNearViewport = () => {
+      const rect = video.getBoundingClientRect()
+      return rect.bottom >= -120 && rect.top <= window.innerHeight + 120
+    }
+    const resumeWhenVisible = () => {
+      if (document.visibilityState === 'visible' && isNearViewport()) requestPlayback()
+    }
+    const onNavigation = (event: Event) => {
+      const href = (event as CustomEvent<{ href?: string }>).detail?.href
+      if (href === '#top') requestPlayback()
+    }
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) requestPlayback()
+    }, { rootMargin: '160px 0px', threshold: .01 })
+
+    observer.observe(video)
+    video.addEventListener('loadeddata', requestPlayback)
+    video.addEventListener('canplay', requestPlayback)
+    document.addEventListener('visibilitychange', resumeWhenVisible)
+    document.addEventListener('pointerdown', resumeWhenVisible, true)
+    document.addEventListener('touchstart', resumeWhenVisible, { capture: true, passive: true })
+    document.addEventListener('keydown', resumeWhenVisible, true)
+    window.addEventListener('pageshow', resumeWhenVisible)
+    window.addEventListener('focus', resumeWhenVisible)
+    window.addEventListener('portfolio:intro-complete', requestPlayback)
+    window.addEventListener(PORTFOLIO_NAVIGATION_EVENT, onNavigation)
+    requestPlayback()
+
+    return () => {
+      observer.disconnect()
+      video.removeEventListener('loadeddata', requestPlayback)
+      video.removeEventListener('canplay', requestPlayback)
+      document.removeEventListener('visibilitychange', resumeWhenVisible)
+      document.removeEventListener('pointerdown', resumeWhenVisible, true)
+      document.removeEventListener('touchstart', resumeWhenVisible, true)
+      document.removeEventListener('keydown', resumeWhenVisible, true)
+      window.removeEventListener('pageshow', resumeWhenVisible)
+      window.removeEventListener('focus', resumeWhenVisible)
+      window.removeEventListener('portfolio:intro-complete', requestPlayback)
+      window.removeEventListener(PORTFOLIO_NAVIGATION_EVENT, onNavigation)
+    }
+  }, [requestPlayback])
 
   const replayGreeting = () => {
     const video = videoRef.current
@@ -35,7 +102,7 @@ export function Hero() {
       </motion.div>
     </div>
     <button type="button" className="hero-video" aria-label="重新播放张雅书人物打招呼动画" onClick={replayGreeting}>
-      <video ref={videoRef} autoPlay muted loop playsInline preload="metadata" poster="./assets/hero/zhang-yashu-hero-poster.webp" disablePictureInPicture>
+      <video ref={videoRef} autoPlay muted loop playsInline preload="auto" poster="./assets/hero/zhang-yashu-hero-poster.webp" disablePictureInPicture>
         <source src="./assets/hero/zhang-yashu-hero.mp4" type="video/mp4" />
       </video>
     </button>

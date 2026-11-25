@@ -55,6 +55,6 @@ export function Navbar() {
     <nav className={open ? 'nav-links is-open' : 'nav-links'} aria-label="主导航">
       <div className="nav-link-list">{links.map(([label, href], index) => <a key={href} href={href} onClick={event => navigate(event, href)}><small>{String(index).padStart(2, '0')}</small><span>{label}</span></a>)}</div>
     </nav>
-    <div className="nav-brand" role="img" aria-label="张雅书 ZYS 标志" style={{ backgroundImage: "url('./assets/brand/zys-logo-tight.png')" }} />
+    <img className="nav-brand" src="./assets/brand/zys-logo-tight.png" alt="张雅书 ZYS 标志" draggable="false" />
   </header>
 }

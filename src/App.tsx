@@ -9,7 +9,6 @@ import { SplashVisuals } from './components/SplashVisuals'
 import { WebExperiences } from './components/WebExperiences'
 import { MotionGallery } from './components/MotionGallery'
 import { ContactFooter } from './components/ContactFooter'
-import { PageTransition } from './components/PageTransition'
 import { SectionReveal } from './components/SectionReveal'
 import { IntroLoader, shouldSkipIntro } from './components/IntroLoader'
 import { ScrollPanel } from './components/ScrollPanel'
@@ -37,7 +36,6 @@ export default function App() {
   }, [])
 
   return <main>
-    <PageTransition />
     <IntroLoader />
     <SectionReveal />
     <Navbar />
